@@ -1,5 +1,10 @@
 # GitHubAnalyzer
-Analyze someone's GitHub Activities
+Analyze someone's GitHub Activities  
+
+## Installation
+```bash
+npm i @toriyama/githubanalyzer
+```
 
 ## Usage
 ```javascript
