@@ -1,0 +1,25 @@
+{
+  "name": "githubanalyzer",
+  "version": "0.9.0",
+  "description": "Analyze someone's GitHub Activities",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YUUKIToriyama/GitHubAnalyzer.git"
+  },
+  "keywords": [
+    "GitHub"
+  ],
+  "author": "YUUKIToriyama",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YUUKIToriyama/GitHubAnalyzer/issues"
+  },
+  "homepage": "https://github.com/YUUKIToriyama/GitHubAnalyzer#readme",
+  "dependencies": {
+    "@octokit/core": "^3.4.0"
+  }
+}
