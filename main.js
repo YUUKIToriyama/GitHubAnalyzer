@@ -1,12 +1,12 @@
 const { Octokit } = require("@octokit/core");
+const settings = require("./settings");
+const octokit = new Octokit(settings);
 
-const octokit = new Octokit();
-
-const getAllReposOfTheUser = async (userName) => {
+const getAllReposOfTheUser = (userName) => {
 	return octokit.request("GET /users/{username}/repos", {
 		username: userName,
 		sort: "updated",
-		per_page: 100,
+		per_page: 10,
 	}).then(response => {
 		return response.data.map(repository => repository.name);
 	}).catch(error => {
@@ -19,6 +19,31 @@ const getLanguagesUsedInTheRepo = (userName, repositoryName) => {
 		owner: userName,
 		repo: repositoryName
 	}).then(response => {
-		return result.data;
+		return response.data;
 	})
 }
+
+//getUsersAllRepos("YUUKIToriyama").then(a => { console.log(a.join("\n")) })
+/*
+getLanguagesUsedInRepo("YUUKIToriyama", "imageCompare").then(result => {
+	console.log(result)
+});
+*/
+
+const userName = "YUUKIToriyama";
+getAllReposOfTheUser(userName).then(async repositoryNames => {
+	const frequencyOfLanguages = {};
+	for (let repositoryName of repositoryNames) {
+		await getLanguagesUsedInTheRepo(userName, repositoryName).then(frequency => {
+			Object.keys(frequency).forEach(language => {
+				if (!frequencyOfLanguages.hasOwnProperty(language)) {
+					frequencyOfLanguages[language] = 0;
+				}
+				frequencyOfLanguages[language] = + frequency[language];
+			});
+		});
+	}
+	return frequencyOfLanguages;
+}).then(result => {
+	console.log(result);
+})
