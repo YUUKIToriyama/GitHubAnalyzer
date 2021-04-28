@@ -6,7 +6,7 @@ const getAllReposOfTheUser = (userName) => {
 	return octokit.request("GET /users/{username}/repos", {
 		username: userName,
 		sort: "updated",
-		per_page: 10,
+		per_page: 100,
 	}).then(response => {
 		return response.data.map(repository => repository.name);
 	}).catch(error => {
